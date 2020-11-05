@@ -14,7 +14,7 @@ CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 
 
-int main(int argc,const char** argv)
+int main(int ,const char** )
 {
     /*
     CommandLineParser parser(argc, argv,
@@ -43,14 +43,16 @@ int main(int argc,const char** argv)
 
 
     VideoCapture capture;
-
-    capture.open(0);
+    int apiID = cv::CAP_ANY;
+    int deviceID = 0;
+    capture.open(deviceID, apiID);
     if (! capture.isOpened() )
     {
       cout << "--(!)Error opening video capture" << endl;
       return -1;
     }
-    Mat frame; 
+    Mat frame;
+    cout << "(!)Press any key to termitate" << endl;
     while (capture.read(frame) )
     {
       if (frame.empty())
@@ -59,8 +61,7 @@ int main(int argc,const char** argv)
         break;
       }
       detectAndDisplay( frame );
-
-      if (waitKey(10) == 27)
+      if (waitKey(5) >= 0)
       {
         break;
       }
